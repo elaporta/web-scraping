@@ -24,7 +24,7 @@ const sanitizeText = (text) => {
 	return text;
 }
 
-const formatEvents = (events) => {
+const formatPasslineEvents = (events) => {
 	let results = [];
 
 	for(let event of events){
@@ -43,6 +43,25 @@ const formatEvents = (events) => {
 	return results;
 }
 
+const formatRedticketsEvents = (events) => {
+	let results = [];
+
+	for(let event of events){
+		const $ = cheerio.load(event);
+
+		results.push({
+			url: 'https://redtickets.uy' + $('a').first().attr('href'),
+			img: 'https://redtickets.uy' + $('img').first().attr('src'),
+			title: $('.EventTitle').first().text(),
+			date: $('.EventInfo').first().text(),
+			cost: null,
+			location: $('.EventInfo').first().next().text(),
+		});
+	}
+
+	return results;
+}
+
 const saveFile = (data) => {
 	fs.writeFile('./events.json', JSON.stringify(data), function(err) {
 			if(err){
@@ -55,20 +74,20 @@ const saveFile = (data) => {
 	);
 }
 
-const puppeteerExample = async () => {
+const getPasslineData = async () => {
 	let results = [];
 
 	try {
-		// Setup broser
+		// Setup browser
 		const browser = await puppeteer.launch();
 		const page = await browser.newPage();
-		// page.on('console', (log) => console[log._type](log._text)); // Display browser console.log
 		await page.goto('https://www.passline.com/uruguay');
 		await page.goto('https://www.passline.com/eventos-presencial.php');
-		// await page.waitForSelector('.grid', { visible: true });
+		// await page.screenshot({ path: 'page.png' });
+		// page.on('console', (log) => console[log._type](log._text)); // Display browser console.log
 
 		// Get page paginator
-		let paginator = await querySelectorAll(page, 'input.btn-pag');
+		const paginator = await querySelectorAll(page, 'input.btn-pag');
 
 		if(paginator.length > 1){
 			for(let i = 0; i < paginator.length; i++) {
@@ -79,8 +98,8 @@ const puppeteerExample = async () => {
 				}
 
 				// Get events
-				let events = await querySelectorAll(page, '.grid > li');
-				results = [...results, ...formatEvents(events)];
+				const events = await querySelectorAll(page, '.grid > li');
+				results = [...results, ...formatPasslineEvents(events)];
 			}
 		}
 
@@ -99,4 +118,53 @@ const puppeteerExample = async () => {
 	}
 }
 
-puppeteerExample();
+const getRedticketsData = async () => {
+	let results = [];
+
+	try {
+		// Setup browser
+		const browser = await puppeteer.launch();
+		const page = await browser.newPage();
+		await page.goto('https://redtickets.uy/busqueda?*,3,0');
+		await page.waitFor(5000);
+		// page.on('console', (log) => console[log._type](log._text));
+
+		// Get page paginator
+		const paginator = await querySelectorAll(page, '#W0020SECTION1 > span > a');
+
+		if(paginator.length > 1){
+
+			// Limit until the next paginator button
+			const limit = paginator.length - 1;
+
+			for(let i = 0; i < limit; i++) {
+
+				// Skip reload the first page
+				if(i != 0){
+					// await page.goto(`https://redtickets.uy/busqueda?*,3,${i}`);
+					// await page.waitFor(5000);
+				}
+
+				// Get events
+				const events = await querySelectorAll(page, 'div.card-inner');
+				results = [...results, ...formatRedticketsEvents(events)];
+			}
+		}
+
+		// Close browser
+		await browser.close();
+
+		// Display events
+		console.log(results);
+		console.log('size:', results.length);
+
+		// Save file
+		// saveFile(results);
+	}
+	catch(error){
+		console.log(error);
+	}
+}
+
+// getPasslineData();
+getRedticketsData();

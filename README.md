@@ -1,7 +1,7 @@
 # web-scraping
 Web scraping example using Node.js
 
-This script collects information about events from a web page and stores it in a JSON file.
+This script collects information about events from a web page and stores it into JSON file.
 
 # How to run
 
