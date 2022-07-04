@@ -29,13 +29,15 @@ const formatPasslineEvents = (events) => {
 
 	for(let event of events) {
 		const $ = cheerio.load(event);
+		let cost = sanitizeText($('figcaption > span').first().next().text());
+		cost = (cost.includes('$')) ? cost : null;
 
 		results.push({
 			url: $('a').first().attr('href'),
 			img: $('figure > img').first().attr('src'),
 			title: $('figcaption > h3').first().text(),
 			date: sanitizeText($('figcaption > span').first().text()),
-			cost: sanitizeText($('figcaption > span').first().next().text()),
+			cost: cost,
 			location: sanitizeText($('figcaption > span').first().next().next().text()),
 			platform: 'passline'
 		});
@@ -165,4 +167,4 @@ const getRedticketsData = async () => {
 }
 
 getPasslineData();
-getRedticketsData();
+// getRedticketsData();
