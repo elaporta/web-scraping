@@ -106,8 +106,8 @@ dist
 # misc
 .DS_Store
 
-# json files
-events.json
+# events files
+events/*.json
 
-# page screenshot
-page.png
+# page screenshots
+*.png
