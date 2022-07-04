@@ -167,4 +167,4 @@ const getRedticketsData = async () => {
 }
 
 getPasslineData();
-// getRedticketsData();
+getRedticketsData();
