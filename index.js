@@ -2,6 +2,7 @@ import puppeteer from 'puppeteer';
 
 import { getRedticketsData } from './sources/redtickets.js';
 import { getPasslineData } from './sources/passline.js';
+import { getTickantelData } from './sources/tickantel.js';
 
 const init = async () => {
 	try {
@@ -18,7 +19,8 @@ const init = async () => {
 
 		await getPasslineData(page);
 		await getRedticketsData(page);
-
+		await getTickantelData(page);
+		
 		// Close browser
 		console.log('\nClosing browser');
 		await browser.close();
