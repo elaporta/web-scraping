@@ -17,7 +17,7 @@ const formatTickantelEvents = (events) => {
 			date: sanitizeText($('p.auto-pf-date').text()),
 			cost: null,
 			location: sanitizeText($('div.card-content > p').eq(2).text()),
-			platform: 'tickantel'
+			source: 'tickantel'
 		});
 	}
 

@@ -17,7 +17,7 @@ const formatRedticketsEvents = (events) => {
 			date: $('.EventInfo').eq(0).text(),
 			cost: null,
 			location: $('.EventInfo').eq(1).text(),
-			platform: 'redtickets'
+			source: 'redtickets'
 		});
 	}
 

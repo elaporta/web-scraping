@@ -19,7 +19,7 @@ const formatPasslineEvents = (events) => {
 			date: sanitizeText($('figcaption > span').first().text()),
 			cost: cost,
 			location: sanitizeText($('figcaption > span').first().next().next().text()),
-			platform: 'passline'
+			source: 'passline'
 		});
 	}
 
