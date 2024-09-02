@@ -7,7 +7,13 @@ This script collects information about events from a web page and stores it into
 
 1. npm i
 2. node .
-2.1. For raddios script: node . --country=COUNTRY_NAME
+
+# For raddios script
+
+1. npm i
+2. node . --country=COUNTRY_NAME*
+
+*Allowed countries: Uruguay, Argentina, Brasil, Chile, Espana, Estados-Unidos. Default: Argentina
 
 # Shared dependencies
 
