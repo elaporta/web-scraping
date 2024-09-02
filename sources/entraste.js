@@ -41,7 +41,7 @@ export const getEntrasteData = async (page) => {
 		results = [...results, ...formatEntrasteEvents(events)];
 
 		// Display events
-		console.log('> size:', results.length);
+		console.log('> length:', results.length);
 
 		// Save file
 		await saveFile(results, 'entraste');

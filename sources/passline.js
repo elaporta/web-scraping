@@ -63,7 +63,7 @@ export const getPasslineData = async (page) => {
 		}
 
 		// Display events
-		console.log('> size:', results.length);
+		console.log('> length:', results.length);
 
 		// Save file
 		await saveFile(results, 'passline');

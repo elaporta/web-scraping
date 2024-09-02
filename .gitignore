@@ -111,3 +111,5 @@ events/*.json
 
 # page screenshots
 *.png
+*.jpg
+*.webp

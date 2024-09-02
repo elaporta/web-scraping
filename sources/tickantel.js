@@ -1,6 +1,6 @@
 import * as cheerio from 'cheerio';
 
-import { querySelectorAll, sanitizeText } from '../helpers/utils.js';
+import { querySelectorAll, sanitizeText, waitFor } from '../helpers/utils.js';
 import { saveFile } from '../helpers/file-system.js';
 import { resetTimer, logElapsedTime } from '../helpers/time-events.js';
 
@@ -38,10 +38,6 @@ export const getTickantelData = async (page) => {
 
 		await page.evaluate(async () => {
 			let continueLoading = true;
-
-			function waitFor(delay) {
-				return new Promise(resolve => setTimeout(resolve, delay));
-			}
 
 			while(continueLoading) {
 				const loadMoreBtn = document.querySelector(".cargar-link");

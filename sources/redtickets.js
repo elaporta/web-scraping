@@ -57,7 +57,7 @@ export const getRedticketsData = async (page) => {
 		}
 
 		// Display events
-		console.log('> size:', results.length);
+		console.log('> length:', results.length);
 
 		// Save file
 		await saveFile(results, 'redtickets');

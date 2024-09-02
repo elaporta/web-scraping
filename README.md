@@ -7,11 +7,14 @@ This script collects information about events from a web page and stores it into
 
 1. npm i
 2. node .
+2.1. For raddios script: node . --country=COUNTRY_NAME
 
 # Shared dependencies
 
-1. libatk-bridge2.0-0
-2. libcups2
-3. libxkbcommon-x11-0
-4. libgbm-dev
-5. libpangocairo-1.0-0
+1. libnss3
+2. libasound2t64
+3. libatk-bridge2.0-0
+4. libcups2
+5. libxkbcommon-x11-0
+6. libgbm-dev
+7. libpangocairo-1.0-0

@@ -4,6 +4,7 @@ import { getRedticketsData } from './sources/redtickets.js';
 import { getPasslineData } from './sources/passline.js';
 import { getTickantelData } from './sources/tickantel.js';
 import { getEntrasteData } from './sources/entraste.js';
+import { getRaddiosData } from './sources/raddios.js';
 
 const init = async () => {
 	try {
@@ -22,6 +23,7 @@ const init = async () => {
 		await getRedticketsData(page);
 		await getTickantelData(page);
 		await getEntrasteData(page);
+		await getRaddiosData(page);
 
 		// Close browser
 		console.log('\nClosing browser');
